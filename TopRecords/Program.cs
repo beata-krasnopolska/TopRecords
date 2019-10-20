@@ -27,8 +27,21 @@ namespace TopRecords
             Console.WriteLine("How many records from the list would you like to display?");
             int recordsNumber = int.Parse(Console.ReadLine());
 
+            var recordsQuery = (from record in myList
+                               orderby record descending
+                               select record)
+                               .Take(recordsNumber);
+
             var recordsMethod = myList.OrderByDescending(p => p).Take(recordsNumber);
 
+            Console.WriteLine("First check by LINQ Query syntax:");
+            foreach (var number in recordsQuery)
+            {
+                Console.WriteLine(number);
+            }
+            Console.ReadKey();
+
+            Console.WriteLine("Additional check by LINQ Method:");
             foreach (var number in recordsMethod)
             {
                 Console.WriteLine(number);
